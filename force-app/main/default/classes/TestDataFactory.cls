@@ -5,33 +5,19 @@
 @IsTest
 public class TestDataFactory {
 
-    public static List<Account> createAccount(Boolean doInsert, Integer size) {
-
-        List<Account> accounts = new List<Account>();
-        for (Integer i = 0; i < size; i++) {
-            Account account = new Account();
-            account.Name = 'TestAccount' + i;
-            accounts.add(account);
-        }
-
-        if (doInsert) {
-            insert accounts;
-        }
-        return accounts;
+    public static Account createAccount(String name) {
+        Account account = new Account();
+        account.Name = name;
+        insert account;
+        return account;
     }
 
-    public static List<Product2> createProduct(Boolean doInsert, Integer size) {
-        List<Product2> products = new List<Product2>();
-        for (Integer i = 0; i < size; i++) {
-            Product2 product = new Product2();
-            product.Name = 'Test Product' + i;
-            product.ProductCode = '000' + i;
-            products.add(product);
-        }
-        if (doInsert) {
-            insert products;
-        }
-        return products;
+    public static Product2 createProduct(String productCode, String productName) {
+        Product2 product = new Product2();
+        product.Name = productName;
+        product.ProductCode = productCode;
+        insert product;
+        return product;
     }
 
     public static Pricebook2 activateStandardPriceBook() {
@@ -41,19 +27,46 @@ public class TestDataFactory {
         return standardPricebook2;
     }
 
-    public static List<Pricebook2> createPriceBooks(Boolean doInsert, Integer size) {
-        List<Pricebook2> priceBooks = new List<Pricebook2>();
-        for (Integer i = 0; i < size; i++) {
-            Pricebook2 customPriceBook = new Pricebook2();
-            customPriceBook.Name = 'CustomPriceBook' + i;
-            customPriceBook.IsActive = true;
-            priceBooks.add(customPriceBook);
-        }
-        if (doInsert) {
-            insert priceBooks;
-        }
-        return priceBooks;
+    public static Pricebook2 createPriceBooks(String priceBookName) {
+        Pricebook2 customPriceBook = new Pricebook2();
+        customPriceBook.Name = priceBookName;
+        customPriceBook.IsActive = true;
+        insert customPriceBook;
+        return customPriceBook;
     }
+
+    public static PricebookEntry createPriceBookEntry(Id priceBookId, Id productId, Decimal UnitPrice) {
+        PricebookEntry pricebookEntryForCustomPriceBook = new PricebookEntry();
+        pricebookEntryForCustomPriceBook.Product2Id = productId;
+        pricebookEntryForCustomPriceBook.Pricebook2Id = priceBookId;
+        pricebookEntryForCustomPriceBook.UnitPrice = UnitPrice;
+        pricebookEntryForCustomPriceBook.IsActive = true;
+        insert pricebookEntryForCustomPriceBook;
+        return pricebookEntryForCustomPriceBook;
+    }
+
+    public static Order createOrder(Id priceBookId, Id accountId, Date orderDate, String status) {
+        Order order = new Order();
+        order.AccountId = accountId;
+        order.Status = status;
+        order.Pricebook2Id = priceBookId;
+        order.EffectiveDate = orderDate;
+        insert order;
+        return order;
+    }
+
+    public static OrderItem createOrderItem(Id priceBookId, Id productId, Id orderId, Decimal quantity, Decimal unitPrice) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.PricebookEntryId = priceBookId;
+        orderItem.UnitPrice = unitPrice;
+        orderItem.Product2Id = productId;
+        orderItem.Quantity = quantity;
+        orderItem.OrderId = orderId;
+        insert orderItem;
+        return orderItem;
+    }
+
+
 
 
 }

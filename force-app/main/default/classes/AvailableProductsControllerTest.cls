@@ -7,45 +7,17 @@ private class AvailableProductsControllerTest {
 
     @TestSetup
     static void setup() {
-
-        List<Account> accounts = TestDataFactory.createAccount(true, 1);
-        Account account = accounts.get(0);
-        List<Product2> products = TestDataFactory.createProduct(true, 1);
-        Product2 product = products.get(0);
+        Account account = TestDataFactory.createAccount('Test Account');
+        Product2 product = TestDataFactory.createProduct('0001', 'Test Product');
 
         TestDataFactory.activateStandardPriceBook();
-        PricebookEntry pricebookEntryForStandardPriceBook = new PricebookEntry();
-        pricebookEntryForStandardPriceBook.Product2Id = product.Id;
-        pricebookEntryForStandardPriceBook.Pricebook2Id = Test.getStandardPricebookId();
-        pricebookEntryForStandardPriceBook.UnitPrice = 20;
-        pricebookEntryForStandardPriceBook.IsActive = true;
-        insert pricebookEntryForStandardPriceBook;
+        PricebookEntry pricebookEntryForStandardPriceBook = TestDataFactory.createPriceBookEntry(Test.getStandardPricebookId(), product.Id, 20);
+        
+        Pricebook2 customPriceBook = TestDataFactory.createPriceBooks('CustomPriceBook');
+        PricebookEntry pricebookEntryForCustomPriceBook = TestDataFactory.createPriceBookEntry(customPriceBook.Id, product.Id, 20);
 
-        List<Pricebook2> priceBooks = TestDataFactory.createPriceBooks(true, 1);
-        Pricebook2 customPriceBook = priceBooks.get(0);
-        PricebookEntry pricebookEntryForCustomPriceBook = new PricebookEntry();
-        pricebookEntryForCustomPriceBook.Product2Id = product.Id;
-        pricebookEntryForCustomPriceBook.Pricebook2Id = customPriceBook.Id;
-        pricebookEntryForCustomPriceBook.UnitPrice = 20;
-        pricebookEntryForCustomPriceBook.IsActive = true;
-        insert pricebookEntryForCustomPriceBook;
-
-        Order order = new Order();
-        order.AccountId = account.Id;
-        order.Status = 'Draft';
-        order.Pricebook2Id = customPriceBook.Id;
-        order.EffectiveDate = Date.today();
-        insert order;
-
-        OrderItem orderItem = new OrderItem();
-        orderItem.PricebookEntryId = pricebookEntryForCustomPriceBook.Id;
-        orderItem.UnitPrice = pricebookEntryForCustomPriceBook.UnitPrice;
-        orderItem.Product2Id = product.Id;
-        orderItem.Quantity = 2;
-        orderItem.OrderId = order.Id;
-        insert orderItem;
-
-
+        Order order = TestDataFactory.createOrder(customPriceBook.Id, account.Id, Date.today(), 'Draft');
+        OrderItem orderItem = TestDataFactory.createOrderItem(pricebookEntryForCustomPriceBook.Id, product.Id, order.Id, 2, pricebookEntryForCustomPriceBook.UnitPrice);
     }
 
     @IsTest
