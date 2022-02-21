@@ -1,48 +1,48 @@
 ## Project Structure
 
 # LWC
-availableProducts
-Lists the products for the selected price book
-orderProducts
-Lists the order items, Activate button is located in this component.
-Utility
-Created for to manage commonly used Javascript methods
+availableProducts<br />
+Lists the products for the selected price book<br />
+orderProducts<br />
+Lists the order items, Activate button is located in this component.<br />
+Utility<br />
+Created for to manage commonly used Javascript methods<br />
 
 # Message Channels
-OrderItemUpsert.messageChannel-meta.xml
-Created for to communicate between the components.
+OrderItemUpsert.messageChannel-meta.xml<br />
+Created for to communicate between the components.<br />
 
 # Classes
-AvailableProductsController.cls
-AvailableProductsControllerTest.cls
-OrderProductController.cls
-OrderProductControllerTest.cls
-OrderService.cls
-Responsible to send the order record to the external end-point
-RESTMockServiceResponseGenerator.cls
-Responsible to generate generic mock service responses.
-TestDataFactory.cls
-Responsible to create sample records to be used in the test classes.
+AvailableProductsController.cls<br />
+AvailableProductsControllerTest.cls<br />
+OrderProductController.cls<br />
+OrderProductControllerTest.cls<br />
+OrderService.cls<br />
+Responsible to send the order record to the external end-point<br />
+RESTMockServiceResponseGenerator.cls<br />
+Responsible to generate generic mock service responses.<br />
+TestDataFactory.cls<br />
+Responsible to create sample records to be used in the test classes.<br />
 
 # Custom Labels
-AvailableProductsAddProductButtonLabel
-AvailableProductsCardLabel
-AvailableProductsHideProductListButtonLabel
-AvailableProductsListPriceColumnName
-AvailableProductsProductNameColumnName
-AvailableProductsShowProductListButtonLabel
-OrderActivationIntegrationFailMessage
-OrderActivationIntegrationSuccessMessage
-OrderItemProductNameColumn
-OrderItemQuantityColumnName
-OrderItemTotalPriceColumnName
-OrderItemUnitPriceColumnName
-OrderProductsActivateButtonLabel
-OrderProductsCardLabel
-OrderProductsSpinnerLoadingLabel
-ShowToastEventFailMessageTitle
-ShowToastEventSuccessMessageTitle 
+AvailableProductsAddProductButtonLabel<br />
+AvailableProductsCardLabel<br />
+AvailableProductsHideProductListButtonLabel<br />
+AvailableProductsListPriceColumnName<br />
+AvailableProductsProductNameColumnName<br />
+AvailableProductsShowProductListButtonLabel<br />
+OrderActivationIntegrationFailMessage<br />
+OrderActivationIntegrationSuccessMessage<br />
+OrderItemProductNameColumn<br />
+OrderItemQuantityColumnName<br />
+OrderItemTotalPriceColumnName<br />
+OrderItemUnitPriceColumnName<br />
+OrderProductsActivateButtonLabel<br />
+OrderProductsCardLabel<br />
+OrderProductsSpinnerLoadingLabel<br />
+ShowToastEventFailMessageTitle<br />
+ShowToastEventSuccessMessageTitle <br />
 
 # Named Credential
-Order External System Named Credential
-Responsible to store the external callout authorization credentials
+Order External System Named Credential<br />
+Responsible to store the external callout authorization credentials<br />
