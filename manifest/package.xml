@@ -13,7 +13,6 @@
     <types>
         <members>orderProducts</members>
         <members>utility</members>
-        <members>wrapperComponent</members>
         <members>availableProducts</members>
         <name>LightningComponentBundle</name>
     </types>
@@ -21,5 +20,18 @@
         <members>*</members>
         <name>LightningMessageChannel</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>CustomLabels</name>
+    </types>
+    <types>
+        <members>Order_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>NamedCredential</name>
+    </types>
+
     <version>54.0</version>
 </Package>

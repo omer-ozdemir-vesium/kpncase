@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AvailableProductsAddProductButtonLabel</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products Add Product Button Label</shortDescription>
+        <value>Add Product</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsCardLabel</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products Card Label</shortDescription>
+        <value>Available Products</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsHideProductListButtonLabel</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products Hide Product List Button Label</shortDescription>
+        <value>Hide Product List</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsListPriceColumnName</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products List Price Column Name</shortDescription>
+        <value>List Price</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsProductNameColumnName</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products Product Name Column Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>AvailableProductsShowProductListButtonLabel</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Available Products Show Product List Button Label</shortDescription>
+        <value>Show Product List</value>
+    </labels>
+    <labels>
+        <fullName>OrderActivationIntegrationFailMessage</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Activation Integration Fail Message</shortDescription>
+        <value>An error has occurred while sending the order.</value>
+    </labels>
+    <labels>
+        <fullName>OrderActivationIntegrationSuccessMessage</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Activation Integration Success Message</shortDescription>
+        <value>The order has been activated</value>
+    </labels>
+    <labels>
+        <fullName>OrderItemProductNameColumn</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Item Product Name Column</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>OrderItemQuantityColumnName</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Item Quantity Column Name</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>OrderItemTotalPriceColumnName</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Item Total Price Column Name</shortDescription>
+        <value>Total Price</value>
+    </labels>
+    <labels>
+        <fullName>OrderItemUnitPriceColumnName</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Item Unit Price Column Name</shortDescription>
+        <value>Unit Price</value>
+    </labels>
+    <labels>
+        <fullName>OrderProductsActivateButtonLabel</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Products Activate Button Label</shortDescription>
+        <value>Activate</value>
+    </labels>
+    <labels>
+        <fullName>OrderProductsCardLabel</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Products Card Label</shortDescription>
+        <value>Order Products</value>
+    </labels>
+    <labels>
+        <fullName>OrderProductsSpinnerLoadingLabel</fullName>
+        <categories>orderProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order Products Spinner Loading Label</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>ShowToastEventFailMessageTitle</fullName>
+        <categories>ShowToastEvent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Show Toast Event Fail Message Title</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>ShowToastEventSuccessMessageTitle</fullName>
+        <categories>ShowToastEvent</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Show Toast Event Success Message Title</shortDescription>
+        <value>Success</value>
+    </labels>
+</CustomLabels>
