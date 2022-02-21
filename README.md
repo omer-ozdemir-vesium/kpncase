@@ -1,18 +1,48 @@
-# Salesforce DX Project: Next Steps
+## Project Structure
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+# LWC
+availableProducts
+Lists the products for the selected price book
+orderProducts
+Lists the order items, Activate button is located in this component.
+Utility
+Created for to manage commonly used Javascript methods
 
-## How Do You Plan to Deploy Your Changes?
+# Message Channels
+OrderItemUpsert.messageChannel-meta.xml
+Created for to communicate between the components.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+# Classes
+AvailableProductsController.cls
+AvailableProductsControllerTest.cls
+OrderProductController.cls
+OrderProductControllerTest.cls
+OrderService.cls
+Responsible to send the order record to the external end-point
+RESTMockServiceResponseGenerator.cls
+Responsible to generate generic mock service responses.
+TestDataFactory.cls
+Responsible to create sample records to be used in the test classes.
 
-## Configure Your Salesforce DX Project
+# Custom Labels
+AvailableProductsAddProductButtonLabel
+AvailableProductsCardLabel
+AvailableProductsHideProductListButtonLabel
+AvailableProductsListPriceColumnName
+AvailableProductsProductNameColumnName
+AvailableProductsShowProductListButtonLabel
+OrderActivationIntegrationFailMessage
+OrderActivationIntegrationSuccessMessage
+OrderItemProductNameColumn
+OrderItemQuantityColumnName
+OrderItemTotalPriceColumnName
+OrderItemUnitPriceColumnName
+OrderProductsActivateButtonLabel
+OrderProductsCardLabel
+OrderProductsSpinnerLoadingLabel
+ShowToastEventFailMessageTitle
+ShowToastEventSuccessMessageTitle 
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+# Named Credential
+Order External System Named Credential
+Responsible to store the external callout authorization credentials
