@@ -39,7 +39,7 @@ public with sharing class OrderService {
                 orderItemRequestModel.quantity = orderItem.Quantity;
                 orderItemRequestModels.add(orderItemRequestModel);
             }
-            orderRequestModel.orderItems = orderItemRequestModels;
+            orderRequestModel.orderProducts = orderItemRequestModels;
 
             Map<String, Order_Request__mdt> requestURLs = Order_Request__mdt.getAll();
             Order_Request__mdt methodDetail = requestURLs.get('Method1');
@@ -82,7 +82,7 @@ public with sharing class OrderService {
         public String orderNumber;
         public String type;
         public String status;
-        public List<OrderItemRequestModel> orderItems;
+        public List<OrderItemRequestModel> orderProducts;
     }
 
     class OrderItemRequestModel {
