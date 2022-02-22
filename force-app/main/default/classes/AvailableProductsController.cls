@@ -6,7 +6,6 @@ public with sharing class AvailableProductsController {
 
     @AuraEnabled
     public static AvailableProductListResult getAvailableProductList(Id orderId, Integer recordLimit, List<String> showedProductIds) {
-
         Order order = [
                 SELECT Id,Pricebook2Id, (
                         SELECT Id,Product2Id,PricebookEntryId
@@ -18,7 +17,6 @@ public with sharing class AvailableProductsController {
 
         List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
 
-
         List<PricebookEntry> existPriceBookEntries = getOrderItemPriceBookEntries(orderId, recordLimit, showedProductIds);
         if (!existPriceBookEntries.isEmpty()) {
             pricebookEntries.addAll(existPriceBookEntries);
@@ -27,12 +25,12 @@ public with sharing class AvailableProductsController {
             recordLimit = recordLimit - existPriceBookEntries.size();
         }
 
-        List<PricebookEntry> newPriceBookEntries = getPricebookEntries(order, orderId, recordLimit, showedProductIds);
+        List<PricebookEntry> newPriceBookEntries = getPricebookEntries(order, recordLimit, showedProductIds);
         if (!newPriceBookEntries.isEmpty()) {
             pricebookEntries.addAll(newPriceBookEntries);
         }
 
-        Integer totalRecordSize = getTotalRecordSize(order, orderId, recordLimit, showedProductIds);
+        Integer totalRecordSize = getTotalRecordSize(order, recordLimit, showedProductIds);
         AvailableProductListResult result = new AvailableProductListResult();
         result.totalRecordSize = totalRecordSize;
         result.entries = pricebookEntries;
@@ -40,11 +38,9 @@ public with sharing class AvailableProductsController {
         System.debug('result: ' + result);
 
         return result;
-
     }
 
-
-    private static Integer getTotalRecordSize(Order order, Id orderId, Integer recordLimit, List<String> showedProductIds) {
+    private static Integer getTotalRecordSize(Order order, Integer recordLimit, List<String> showedProductIds) {
         String query = '{0} {1} {2}';
         String querySelect = 'SELECT Count(Id) totalRecordSize';
         String queryFrom = ' FROM PriceBookEntry';
@@ -68,9 +64,7 @@ public with sharing class AvailableProductsController {
         return totalRecordSize;
     }
 
-    private static List<PricebookEntry> getPricebookEntries(
-            Order order,
-            Id orderId, Integer recordLimit, List<String> showedProductIds) {
+    private static List<PricebookEntry> getPricebookEntries(Order order, Integer recordLimit, List<String> showedProductIds) {
         String query = '{0} {1} {2} {3}';
         String querySelect = 'SELECT Id,Name,UnitPrice,Product2Id,PriceBook2Id';
         String queryFrom = ' FROM PriceBookEntry';
@@ -192,8 +186,6 @@ public with sharing class AvailableProductsController {
         if (!orderItemsToUpsert.isEmpty()) {
             upsert orderItemsToUpsert;
         }
-
-
     }
 
     @AuraEnabled
@@ -214,8 +206,7 @@ public with sharing class AvailableProductsController {
     }
 
     //dummy method to create dependency for the labels
-    public static Boolean describeLabels()
-    {
+    public static Boolean describeLabels(){
         String l1 = Label.AvailableProductsAddProductButtonLabel;
         String l2 = Label.AvailableProductsCardLabel;
         String l3 = Label.AvailableProductsHideProductListButtonLabel;
@@ -236,5 +227,4 @@ public with sharing class AvailableProductsController {
         String l18 = Label.ShowToastEventSuccessMessageTitle;
         return true;
     }
-
 }

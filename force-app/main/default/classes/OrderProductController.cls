@@ -52,13 +52,10 @@ public with sharing class OrderProductController {
         }
 
         return orderActivationResult;
-
     }
 
     public class OrderActivationResult {
         @AuraEnabled public Boolean isSuccess { get; set; }
         @AuraEnabled public String message { get; set; }
     }
-
-
 }
