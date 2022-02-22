@@ -13,9 +13,12 @@ public class RESTMockServiceResponseGenerator implements HttpCalloutMock {
     }
 
     public HttpResponse respond(HttpRequest req) {
+        Map<String, Order_Request__mdt> requestURLs = Order_Request__mdt.getAll();
+        Order_Request__mdt methodDetail = requestURLs.get('Method1');
+
         HttpResponse response = new HttpResponse();
         System.debug(req.getEndpoint());
-        if (req.getEndpoint().contains('callout:OrderExternalSystemNamedCredential/test')) {
+        if (req.getMethod() == methodDetail.HTTP_Callout_Type__c && req.getEndpoint().contains('callout:OrderExternalSystemNamedCredential/' + methodDetail.Method__c)) {
             response = new HttpResponse();
             //response.setBody(JSON.serialize(data));
             response.setStatusCode(statusCode);

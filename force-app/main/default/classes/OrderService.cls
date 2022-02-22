@@ -41,10 +41,13 @@ public with sharing class OrderService {
             }
             orderRequestModel.orderItems = orderItemRequestModels;
 
+            Map<String, Order_Request__mdt> requestURLs = Order_Request__mdt.getAll();
+            Order_Request__mdt methodDetail = requestURLs.get('Method1');
+
             Http http = new Http();
             HttpRequest httpRequest = new HttpRequest();
-            httpRequest.setEndpoint('callout:OrderExternalSystemNamedCredential/test');
-            httpRequest.setMethod('POST');
+            httpRequest.setEndpoint('callout:OrderExternalSystemNamedCredential/' + methodDetail.Method__c);
+            httpRequest.setMethod(methodDetail.HTTP_Callout_Type__c);
             httpRequest.setBody(JSON.serializePretty(orderRequestModel));
             HttpResponse httpResponse = http.send(httpRequest);
 
