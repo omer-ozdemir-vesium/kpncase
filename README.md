@@ -48,4 +48,4 @@ Order External System Named Credential<br />
 Responsible to store the external callout authorization credentials<br />
 
 ## Installation
-https://login.salesforce.com/packaging/installPackage.apexp?p0=04t8d000000U95I&isdtp=p1
+https://login.salesforce.com/packaging/installPackage.apexp?p0=04t8d000000U99a&isdtp=p1
