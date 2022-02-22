@@ -22,7 +22,6 @@ private class AvailableProductsControllerTest {
 
     @IsTest
     static void test() {
-        AvailableProductsController.ProductSearchRequestModel requestModel = new AvailableProductsController.ProductSearchRequestModel();
         Order order = [SELECT Id, (SELECT Id,Product2Id FROM OrderItems) FROM Order LIMIT 1];
         List<String> product2Ids = new List<String>();
         for (OrderItem orderItem : order.OrderItems) {
@@ -30,10 +29,7 @@ private class AvailableProductsControllerTest {
         }
         Test.startTest();
         {
-            requestModel.orderId = order.Id;
-            requestModel.recordLimit = 5;
-            requestModel.showedProductIds = product2Ids;
-            AvailableProductsController.AvailableProductListResult result = AvailableProductsController.getAvailableProductList(requestModel);
+            AvailableProductsController.AvailableProductListResult result = AvailableProductsController.getAvailableProductList(order.Id, 5, product2Ids);
             System.assertEquals(1, result.totalRecordSize);
         }
         Test.stopTest();
@@ -99,6 +95,12 @@ private class AvailableProductsControllerTest {
             System.assertEquals(customPricebook.Id, order.Pricebook2Id);
         }
         Test.stopTest();
+    }
+
+    @isTest
+    static void describeLabelsTest(){
+        Boolean TestOk = AvailableProductsController.describeLabels();
+        system.assert(TestOk == true);
     }
 
 

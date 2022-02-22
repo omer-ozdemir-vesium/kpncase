@@ -23,6 +23,7 @@ import CARD_TITLE from '@salesforce/label/c.AvailableProductsCardLabel';
 import SUCCESS_MESSAGE_TITLE from '@salesforce/label/c.ShowToastEventSuccessMessageTitle';
 import FAIL_MESSAGE_TITLE from '@salesforce/label/c.ShowToastEventFailMessageTitle';
 import LOADING_LABEL from '@salesforce/label/c.OrderProductsSpinnerLoadingLabel';
+import ADD_PRODUCT_MESSAGE from '@salesforce/label/c.OrderProductsAddSuccess';
 
 
 const COLUMNS = [
@@ -69,6 +70,7 @@ export default class AvailableProducts extends LightningElement {
     get cardLabel() {
         if (this.totalRecordSize !== null) {
             return `${CARD_TITLE} ( ${this.totalRecordSize} )`;
+        // eslint-disable-next-line no-else-return
         } else {
             return `${CARD_TITLE}`;
         }
@@ -100,12 +102,11 @@ export default class AvailableProducts extends LightningElement {
             this.isPriceBookSelectionAvailable = this?.order?.Pricebook2Id === undefined;
             if (this.isPriceBookSelectionAvailable === false) {
                 return getAvailableProductList({
-                    productSearchRequestModel: {
-                        orderId: this.recordId,
-                        recordLimit: RECORD_LIMIT,
-                        showedProductIds: this.showedProductIds
-                    }
+                    orderId: this.recordId,
+                    recordLimit: RECORD_LIMIT,
+                    showedProductIds: this.showedProductIds
                 });
+            // eslint-disable-next-line no-else-return
             } else {
                 // Get Price Book List
                 return getPriceBooks({});
@@ -133,11 +134,9 @@ export default class AvailableProducts extends LightningElement {
         this.showProductListDataTable = true;
         this.isLoading = true;
         getAvailableProductList({
-            productSearchRequestModel: {
-                orderId: this.recordId,
-                recordLimit: RECORD_LIMIT,
-                showedProductIds: this.showedProductIds
-            }
+            orderId: this.recordId,
+            recordLimit: RECORD_LIMIT,
+            showedProductIds: this.showedProductIds
         }).then(data => {
             this.prepareProductListToDataTable(data);
         }).catch(error => {
@@ -168,11 +167,9 @@ export default class AvailableProducts extends LightningElement {
         }).then(data => {
             // Get Available Products By Selected Price Book
             return getAvailableProductList({
-                productSearchRequestModel: {
-                    orderId: this.recordId,
-                    recordLimit: RECORD_LIMIT,
-                    showedProductIds: this.showedProductIds
-                }
+                orderId: this.recordId,
+                recordLimit: RECORD_LIMIT,
+                showedProductIds: this.showedProductIds
             })
         }).then(data => {
             this.showPriceBookSelectionLayout = false;
@@ -198,6 +195,11 @@ export default class AvailableProducts extends LightningElement {
             this.selectedRows = [];
             this.template.querySelector('lightning-datatable').selectedRows = [];
             const payload = {};
+            this.dispatchEvent(new ShowToastEvent({
+                variant: 'success',
+                title: SUCCESS_MESSAGE_TITLE,
+                message: ADD_PRODUCT_MESSAGE
+            }));
             publish(this.messageContext, ORDER_ITEM_UPSERT_CHANNEL, payload);
             this.refreshAvailableProductList();
         }).catch(error => {
@@ -224,7 +226,6 @@ export default class AvailableProducts extends LightningElement {
         this.loadProductList();
     }
 
-
     preparePricePriceBookOptions(data) {
         this.showPriceBookSelectionLayout = true;
         this.pricebookOptions = data.map(item => {
@@ -238,7 +239,6 @@ export default class AvailableProducts extends LightningElement {
     handlePriceBookChange(event) {
         this.selectedPriceBookId = event.detail.value;
     }
-
 
     handleLoadMore(event) {
         event.preventDefault();
@@ -259,8 +259,6 @@ export default class AvailableProducts extends LightningElement {
                 this.loadProductList();
             }
         }
-
-
     }
 
     prepareProductListToDataTable(data) {
@@ -276,6 +274,4 @@ export default class AvailableProducts extends LightningElement {
             this.productList = [...new Map(this.productList.map(item => [item["Id"], item])).values()];
         }
     }
-
-
 }
