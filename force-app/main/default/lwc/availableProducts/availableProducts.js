@@ -5,8 +5,7 @@
 import {api, LightningElement, track, wire} from 'lwc';
 import getAvailableProductList from '@salesforce/apex/AvailableProductsController.getAvailableProductList';
 import getPriceBooks from '@salesforce/apex/AvailableProductsController.getPriceBooks';
-import getOrder
-    from '@salesforce/apex/AvailableProductsController.getOrder';
+import getOrder from '@salesforce/apex/AvailableProductsController.getOrder';
 import setPriceBook from '@salesforce/apex/AvailableProductsController.setPriceBook';
 import updateOrderItems from '@salesforce/apex/AvailableProductsController.updateOrderItems';
 import {getErrorMessage} from "c/utility";

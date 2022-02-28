@@ -105,6 +105,14 @@
         <value>Activate</value>
     </labels>
     <labels>
+        <fullName>OrderProductsAddSuccess</fullName>
+        <categories>availableProducts</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AvailableProductsAddSuccess</shortDescription>
+        <value>Product has been added</value>
+    </labels>
+    <labels>
         <fullName>OrderProductsCardLabel</fullName>
         <categories>orderProducts</categories>
         <language>en_US</language>

@@ -32,6 +32,9 @@
         <members>*</members>
         <name>NamedCredential</name>
     </types>
-
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
+    </types>
     <version>54.0</version>
 </Package>
