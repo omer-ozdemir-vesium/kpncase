@@ -24,7 +24,10 @@
                         data={orderItems}
                         hide-checkbox-column
                         show-row-number-column
-                        columns={columns}>
+                        columns={columns}
+                        sorted-by={sortBy}
+                        sorted-direction={sortDirection}
+                        onsort={doSorting}>
                 </lightning-datatable>
             </div>
         </lightning-card>

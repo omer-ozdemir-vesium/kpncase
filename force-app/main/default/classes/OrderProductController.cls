@@ -5,19 +5,27 @@
 public with sharing class OrderProductController {
 
     @AuraEnabled
-    public static List<OrderItem> getOrderItems(Id orderId) {
-        String query = '{0} {1} {2}';
+    public static List<OrderItem> getOrderItems(Id orderId, String sortBy, String sortDirection) {
+        String query = '{0} {1} {2} {3}';
         String querySelect = 'SELECT Id,Product2.Name,UnitPrice,Quantity,TotalPrice';
         String queryFrom = 'FROM OrderItem';
         String queryWhere = 'WHERE Id!=NULL ';
+        String queryOrder = '';
+        
         queryWhere += 'AND OrderId=:orderId';
+        if (String.isNotBlank(sortBy) && String.isNotBlank(sortDirection)){
+            String internalSortBy = sortBy == 'ProductName' ? 'Product2.Name' : sortBy;
+            queryOrder = 'ORDER BY ' + internalSortBy + ' ' + sortDirection;
+        }
+
         query = String.format(query, new List<String>{
                 querySelect,
                 queryFrom,
-                queryWhere
+                queryWhere,
+                queryOrder
         });
         System.debug(query);
-        return Database.query(query);
+        return Database.query(String.escapeSingleQuotes(query));
     }
 
     @AuraEnabled

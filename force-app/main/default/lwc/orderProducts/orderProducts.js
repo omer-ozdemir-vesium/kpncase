@@ -2,14 +2,14 @@
  * Created by Omer on 18/02/2022.
  */
 
-import {api, LightningElement, wire} from 'lwc';
+import {api, LightningElement, track, wire} from 'lwc';
 import getOrderItems from '@salesforce/apex/OrderProductController.getOrderItems'
 import activateOrder from '@salesforce/apex/OrderProductController.activateOrder'
 import {getErrorMessage} from "c/utility";
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
 import {subscribe, MessageContext} from 'lightning/messageService';
 import ORDER_ITEM_UPSERT_CHANNEL from '@salesforce/messageChannel/OrderItemUpsert__c';
-import {getRecord} from 'lightning/uiRecordApi';
+import {getRecord, updateRecord, getRecordNotifyChange } from 'lightning/uiRecordApi';
 
 import ORDER_ITEM_PRODUCT_NAME_FIELD_NAME from '@salesforce/label/c.OrderItemProductNameColumn';
 import ORDER_ITEM_UNIT_PRICE_FIELD_NAME from '@salesforce/label/c.OrderItemUnitPriceColumnName';
@@ -27,25 +27,29 @@ const COLUMNS = [
         label: ORDER_ITEM_PRODUCT_NAME_FIELD_NAME,
         fieldName: 'ProductName',
         type: 'text',
-        cellAttributes: {alignment: 'left'}
+        cellAttributes: { alignment: 'left' },
+        sortable: true
     },
     {
         label: ORDER_ITEM_UNIT_PRICE_FIELD_NAME,
         fieldName: 'UnitPrice',
         type: 'currency',
-        cellAttributes: {alignment: 'left'}
+        cellAttributes: { alignment: 'left' },
+        sortable: true
     },
     {
         label: ORDER_ITEM_QUANTITY_FIELD_NAME,
         fieldName: 'Quantity',
         type: 'number',
-        cellAttributes: {alignment: 'left'}
+        cellAttributes: { alignment: 'left' },
+        sortable: true
     },
     {
         label: ORDER_ITEM_TOTAL_PRICE_FIELD_NAME,
         fieldName: 'TotalPrice',
         type: 'currency',
-        cellAttributes: {alignment: 'left'}
+        cellAttributes: { alignment: 'left' },
+        sortable: true
     },
 ]
 
@@ -61,6 +65,8 @@ export default class OrderProducts extends LightningElement {
     order;
     cardLabel = CARD_LABEL;
     activateButtonLabel = ACTIVATE_BUTTON_LABEL;
+    @track sortBy = 'ProductName';
+    @track sortDirection = 'asc';
 
     @wire(getRecord, {recordId: '$recordId', fields: ORDER_FIELDS})
     wiredRecord({error, data}) {
@@ -104,7 +110,9 @@ export default class OrderProducts extends LightningElement {
         activateOrder({
             orderId: this.recordId
         }).then(data => {
-            eval("$A.get('e.force:refreshView').fire();");
+            getRecordNotifyChange([{recordId: this.recordId}]);
+            //updateRecord({ fields: this.recordId }); //refresh the record with old method
+            //eval("$A.get('e.force:refreshView').fire();"); //refresh the record with insecure js
             this.dispatchEvent(new ShowToastEvent({
                 variant: data.isSuccess ? 'success' : 'error',
                 title: data.isSuccess ? SUCCESS_MESSAGE_TITLE : FAIL_MESSAGE_TITLE,
@@ -125,7 +133,9 @@ export default class OrderProducts extends LightningElement {
     getOrderItems() {
         this.isLoading = true;
         getOrderItems({
-            orderId: this.recordId
+            orderId: this.recordId,
+            sortBy: this.sortBy,
+            sortDirection: this.sortDirection
         }).then(data => {
             const clone = JSON.parse(JSON.stringify(data));
             clone.forEach(item => {
@@ -142,6 +152,12 @@ export default class OrderProducts extends LightningElement {
         }).finally(() => {
             this.isLoading = false;
         })
+    }
+
+    doSorting(event) {
+        this.sortBy = event.detail.fieldName;
+        this.sortDirection = event.detail.sortDirection;
+        this.getOrderItems();
     }
 
     get activeButtonDisabled() {

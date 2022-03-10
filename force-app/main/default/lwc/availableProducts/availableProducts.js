@@ -2,7 +2,7 @@
  * Created by Omer on 18/02/2022.
  */
 
-import {api, LightningElement, track, wire} from 'lwc';
+import {api, LightningElement, wire} from 'lwc';
 import getAvailableProductList from '@salesforce/apex/AvailableProductsController.getAvailableProductList';
 import getPriceBooks from '@salesforce/apex/AvailableProductsController.getPriceBooks';
 import getOrder from '@salesforce/apex/AvailableProductsController.getOrder';

@@ -55,7 +55,7 @@ public with sharing class AvailableProductsController {
                 queryWhere
         });
         System.debug(query);
-        List<AggregateResult> countResults = Database.query(query);
+        List<AggregateResult> countResults = Database.query(String.escapeSingleQuotes(query));
         Integer totalRecordSize = 0;
         if (countResults != null && !countResults.isEmpty()) {
             totalRecordSize = (Integer) countResults.get(0).get('totalRecordSize');
@@ -99,7 +99,7 @@ public with sharing class AvailableProductsController {
                 queryLimit
         });
         System.debug(query);
-        List<PricebookEntry> pricebookEntries = Database.query(query);
+        List<PricebookEntry> pricebookEntries = Database.query(String.escapeSingleQuotes(query));
         return pricebookEntries;
     }
 
@@ -128,7 +128,7 @@ public with sharing class AvailableProductsController {
         });
 
         System.debug(query);
-        List<OrderItem> orderItems = Database.query(query);
+        List<OrderItem> orderItems = Database.query(String.escapeSingleQuotes(query));
         for (OrderItem orderItem : orderItems) {
             orderItemPricebookEntries.add(orderItem.PricebookEntry);
         }
