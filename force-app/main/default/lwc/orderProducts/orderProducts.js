@@ -158,6 +158,24 @@ export default class OrderProducts extends LightningElement {
         this.sortBy = event.detail.fieldName;
         this.sortDirection = event.detail.sortDirection;
         this.getOrderItems();
+        //this.sortDataByJS(this.sortBy, this.sortDirection);
+    }
+
+    sortDataByJS(fieldname, direction) {
+        let parseData = JSON.parse(JSON.stringify(this.orderItems));
+        let keyValue = (a) => {
+            return a[fieldname];
+        };
+        // cheking reverse direction
+        let isReverse = direction === 'asc' ? 1: -1;
+        // sorting data
+        parseData.sort((x, y) => {
+            x = keyValue(x) ? keyValue(x) : ''; // handling null values
+            y = keyValue(y) ? keyValue(y) : '';
+            // sorting values based on direction
+            return isReverse * ((x > y) - (y > x));
+        });
+        this.orderItems = parseData;
     }
 
     get activeButtonDisabled() {
